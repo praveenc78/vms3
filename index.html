@@ -2,7 +2,7 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <meta name="viewport" content="width=1920, initial-scale=1.0, maximum-scale=1.0">
       <meta name="slides-format" content="viewport" />
       <title>Vanity Medical Spa TV Slideshow - Latest Version</title>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,6 +48,12 @@
             overflow: hidden;
             background: var(--color-bg);
          }
+		  html, body {
+		  width: 1920px;
+		  height: 1080px;
+		  overflow: hidden;
+		  transform-origin: top left;
+        }
          body {
             font-family: Inter, sans-serif;
             color: var(--color-text);
@@ -1654,6 +1660,14 @@
          animateSlide(document.querySelector(".slide.active"));
          updateNav();
          startAutoplay();
+		  function scaleToFit() {
+  const scaleX = window.innerWidth / 1920;
+  const scaleY = window.innerHeight / 1080;
+  const scale = Math.min(scaleX, scaleY);
+  document.body.style.transform = `scale(${scale})`;
+}
+scaleToFit();
+window.addEventListener('resize', scaleToFit);
       </script>
    </body>
 </html>
