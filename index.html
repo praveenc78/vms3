@@ -4,7 +4,7 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="slides-format" content="viewport" />
-      <title>Vanity Medical Spa TV Slideshow</title>
+      <title>Vanity Medical Spa TV Slideshow - Latest Version</title>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link
@@ -41,16 +41,23 @@
          *::after {
             box-sizing: border-box;
          }
-         html,
-         body {
-            margin: 0;
+         html {
+            width: 100%;
             height: 100%;
             overflow: hidden;
-            background: var(--color-bg);
+            background: #0f0d0b;
          }
          body {
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            transform-origin: top left;
             font-family: Inter, sans-serif;
             color: var(--color-text);
+            background: var(--color-bg);
          }
          .deck {
             width: 1920px;
@@ -234,30 +241,30 @@
          }
          .hero-photo {
             width: 100%;
-            height: 78vh;
+            height: 843px;
             object-fit: cover;
             object-position: center;
             border-radius: 30px;
          }
          .hero-photo-65 {
-            height: 65vh;
+            height: 702px;
          }
 		  .hero-photo-60 {
-            height: 60vh;
+            height: 648px;
          }
          .service-image {
             width: 100%;
-            height: 60vh;
+            height: 648px;
             object-fit: cover;
             border-radius: 28px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             background: #111;
          }
 		 .service-image-65 {
-            height: 65vh;
+            height: 702px;
          }
 		  .service-image-60 {
-            height: 60vh;
+            height: 648px;
          }
          .service-copy {
             padding: 34px 36px;
@@ -487,10 +494,10 @@
                padding: 104px 30px 84px;
             }
             .hero-photo {
-               height: 42vh;
+               height: 454px;
             }
             .service-image {
-               height: 40vh;
+               height: 432px;
             }
             .service-grid {
                gap: 26px;
@@ -516,6 +523,7 @@
                width: 100px;
             }
          }
+		 .pc-hide{display:none}
       </style>
    </head>
    <body>
@@ -545,7 +553,7 @@
                      </div>
                   </div>
                </div>
-               <div class="band-sub">Featured services</div>
+               <div class="band-sub">Welcome</div>
             </div>
             <div class="gradient-mesh">
                <div
@@ -609,13 +617,13 @@
             </div>
             <div class="bottom-band">
                <div class="bottom-left">
-                  <span class="bottom-note">Reception slideshow</span>
+                  <span class="bottom-note">Meet Your Provider</span>
                </div>
                <div class="progress-wrap">
-                  <div class="progress-track">
+                  <div class="progress-track pc-hide">
                      <div class="progress-bar" id="progressBar"></div>
                   </div>
-                  <span class="bottom-note" id="slideLabel">01 / 10</span>
+                  <span class="bottom-note pc-hide" id="slideLabel">01 / 12</span>
                </div>
             </div>
          </section>
@@ -635,7 +643,7 @@
                      </div>
                   </div>
                </div>
-               <div class="band-sub">Featured services</div>
+               <div class="band-sub">Welcome</div>
             </div>
             <div class="gradient-mesh">
                <div
@@ -692,13 +700,13 @@
             </div>
             <div class="bottom-band">
                <div class="bottom-left">
-                  <span class="bottom-note">Reception slideshow</span>
+                  <span class="bottom-note">Robert A. Berberian, MD | Vanity Medical Spa</span>
                </div>
                <div class="progress-wrap">
-                  <div class="progress-track">
+                  <div class="progress-track pc-hide">
                      <div class="progress-bar"></div>
                   </div>
-                  <span class="bottom-note">02 / 10</span>
+                  <span class="bottom-note">Bergen County's Top Doctor</span>
                </div>
             </div>
          </section>
@@ -716,7 +724,7 @@
                      <div class="band-sub">Injectables</div>
                   </div>
                </div>
-               <div class="band-sub">Botox Cosmetic</div>
+               <div class="band-sub">Injectables</div>
             </div>
             <div class="gradient-mesh">
                <div
@@ -769,13 +777,13 @@
             </div>
             <div class="bottom-band">
                <div class="bottom-left">
-                  <span class="bottom-note">Reception slideshow</span>
+                  <span class="bottom-note">Ask Us About Tox Tuesday Special</span>
                </div>
                <div class="progress-wrap">
-                  <div class="progress-track">
+                  <div class="progress-track pc-hide">
                      <div class="progress-bar"></div>
                   </div>
-                  <span class="bottom-note">03 / 10</span>
+                  <span class="bottom-note">Award-Winning Injector - Robert A. Berberian, MD</span>
                </div>
             </div>
          </section>
@@ -793,7 +801,7 @@
                      <div class="band-sub">Injectables</div>
                   </div>
                </div>
-               <div class="band-sub">Letybo</div>
+               <div class="band-sub">Injectables</div>
             </div>
             <div class="gradient-mesh">
                <div
@@ -850,13 +858,13 @@
             </div>
             <div class="bottom-band">
                <div class="bottom-left">
-                  <span class="bottom-note">Reception slideshow</span>
+                  <span class="bottom-note">Korean Innovation - FDA Approved</span>
                </div>
                <div class="progress-wrap">
-                  <div class="progress-track">
+                  <div class="progress-track pc-hide">
                      <div class="progress-bar"></div>
                   </div>
-                  <span class="bottom-note">04 / 10</span>
+                  <span class="bottom-note">Award-Winning Injector - Robert A. Berberian, MD</span>
                </div>
             </div>
          </section>
@@ -874,7 +882,7 @@
                      <div class="band-sub">Facial balancing</div>
                   </div>
                </div>
-               <div class="band-sub">Dermal Fillers</div>
+               <div class="band-sub">Injectables</div>
             </div>
             <div class="gradient-mesh">
                <div
@@ -931,13 +939,13 @@
             </div>
             <div class="bottom-band">
                <div class="bottom-left">
-                  <span class="bottom-note">Reception slideshow</span>
+                  <span class="bottom-note">Complete Facial Rejuvenation</span>
                </div>
                <div class="progress-wrap">
-                  <div class="progress-track">
+                  <div class="progress-track pc-hide">
                      <div class="progress-bar"></div>
                   </div>
-                  <span class="bottom-note">05 / 10</span>
+                  <span class="bottom-note">Award-Winning Injector - Robert A. Berberian, MD</span>
                </div>
             </div>
          </section>
@@ -955,7 +963,7 @@
                      <div class="band-sub">Regenerative skin support</div>
                   </div>
                </div>
-               <div class="band-sub">Ariessence PDGF+</div>
+               <div class="band-sub">Regenerative Skin</div>
             </div>
             <div class="gradient-mesh">
                <div
@@ -1012,13 +1020,13 @@
             </div>
             <div class="bottom-band">
                <div class="bottom-left">
-                  <span class="bottom-note">Reception slideshow</span>
+                  <span class="bottom-note">No Blood Draw Required</span>
                </div>
                <div class="progress-wrap">
-                  <div class="progress-track">
+                  <div class="progress-track pc-hide">
                      <div class="progress-bar"></div>
                   </div>
-                  <span class="bottom-note">06 / 10</span>
+                  <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
                </div>
             </div>
          </section>
@@ -1036,7 +1044,7 @@
                      <div class="band-sub">Skin renewal</div>
                   </div>
                </div>
-               <div class="band-sub">Morpheus8 & resurfacing</div>
+               <div class="band-sub">Skin Renewal</div>
             </div>
             <div class="gradient-mesh">
                <div
@@ -1095,13 +1103,13 @@
             </div>
             <div class="bottom-band">
                <div class="bottom-left">
-                  <span class="bottom-note">Reception slideshow</span>
+                  <span class="bottom-note">Complete Skin Rejuvenation</span>
                </div>
                <div class="progress-wrap">
-                  <div class="progress-track">
+                  <div class="progress-track pc-hide">
                      <div class="progress-bar"></div>
                   </div>
-                  <span class="bottom-note">07 / 10</span>
+                   <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
                </div>
             </div>
          </section>
@@ -1119,7 +1127,7 @@
                      <div class="band-sub">Wellness therapy</div>
                   </div>
                </div>
-               <div class="band-sub">EBOO Therapy</div>
+               <div class="band-sub">Wellness Therapy</div>
             </div>
             <div class="gradient-mesh">
                <div
@@ -1156,7 +1164,7 @@
                             transform: translateY(0px)"
                   />
                   <div class="glass-card service-copy reveal">
-                     <div class="kicker">Wellness therapy</div>
+                     <div class="kicker">Regenerative Wellness</div>
                      <h2 class="section-title">EBOO Therapy</h2>
                      <div class="bullet-list">
                         <div class="bullet">
@@ -1181,18 +1189,182 @@
             </div>
             <div class="bottom-band">
                <div class="bottom-left">
-                  <span class="bottom-note">Reception slideshow</span>
+                  <span class="bottom-note">Ozone Therapy</span>
                </div>
                <div class="progress-wrap">
-                  <div class="progress-track">
+			      <div class="progress-track pc-hide">
                      <div class="progress-bar"></div>
                   </div>
-                  <span class="bottom-note">08 / 10</span>
+                  <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
+               </div>
+            </div>
+         </section>
+		 
+		    <section class="slide" data-slide="9">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Wellness therapy</div>
+                  </div>
+               </div>
+               <div class="band-sub">Women's Wellness</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 350px;
+                     height: 350px;
+                     top: -70px;
+                     left: -50px;
+                     background: rgba(98, 168, 197, 0.14);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 260px;
+                     height: 260px;
+                     bottom: -60px;
+                     right: -40px;
+                     background: rgba(207, 172, 82, 0.12);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="service-grid">
+                  <img
+                     class="service-image service-image-65 reveal"
+                     src="o-shot.jpg"
+                     alt="O-Shot For Women"
+				     style="background: rgb(246, 243, 242);
+                            padding: 10px;
+                            transition: opacity 0.45s, transform 0.45s;
+                            opacity: 1;
+                            transform: translateY(0px)"
+                  />
+                  <div class="glass-card service-copy reveal">
+                     <div class="kicker">Intimate Wellness</div>
+                     <h2 class="section-title">The O-Shot</h2>
+                     <div class="bullet-list">
+                        <div class="bullet">
+                           Enhances intimate sensitivity &amp; wellness.
+                        </div>
+                        <div class="bullet">
+                           Addresses urinary stress incontinence.
+                        </div>
+                        <div class="bullet">
+                           Uses natural regenerative growth factors.
+                        </div>
+                        <div class="bullet">
+                           Discreet, in-office care with no downtime.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Request Private Consulation</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                  <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
+               </div>
+            </div>
+         </section>
+		 
+		 <section class="slide" data-slide="10">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Wellness therapy</div>
+                  </div>
+               </div>
+               <div class="band-sub">Men's Wellness</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 350px;
+                     height: 350px;
+                     top: -70px;
+                     left: -50px;
+                     background: rgba(98, 168, 197, 0.14);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 260px;
+                     height: 260px;
+                     bottom: -60px;
+                     right: -40px;
+                     background: rgba(207, 172, 82, 0.12);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="service-grid">
+                  <img
+                     class="service-image service-image-65 reveal"
+                     src="p-shot-paramus-nj.jpg"
+                     alt="P-Shot For Men"
+				     style="background: rgb(246, 243, 242);
+                            padding: 10px;
+                            transition: opacity 0.45s, transform 0.45s;
+                            opacity: 1;
+                            transform: translateY(0px)"
+                  />
+                  <div class="glass-card service-copy reveal">
+                     <div class="kicker">Intimate Wellness</div>
+                     <h2 class="section-title">P-Shot®<br>& More</h2>
+                     <div class="bullet-list">
+                        <div class="bullet">
+                          Regenerative enhancement for performance.
+                        </div>
+                        <div class="bullet">
+                           Addresses erectile dysfunction naturally.
+                        </div>
+                        <div class="bullet">
+                           Penile fillers for aesthetic confidence.
+                        </div>
+                        <div class="bullet">
+                           Safe, professional, and discreet results.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Request Private Consulation</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                   <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
                </div>
             </div>
          </section>
 
-         <section class="slide" data-slide="9">
+         <section class="slide" data-slide="11">
             <div class="top-band">
                <div class="top-left">
                   <img
@@ -1205,7 +1377,7 @@
                      <div class="band-sub">Body contouring</div>
                   </div>
                </div>
-               <div class="band-sub">Sculptra Butt Lift</div>
+               <div class="band-sub">Body Contouring</div>
             </div>
             <div class="gradient-mesh">
                <div
@@ -1265,18 +1437,18 @@
             </div>
             <div class="bottom-band">
                <div class="bottom-left">
-                  <span class="bottom-note">Reception slideshow</span>
+                  <span class="bottom-note">Non-Surgical Butt Lift</span>
                </div>
                <div class="progress-wrap">
-                  <div class="progress-track">
+                  <div class="progress-track pc-hide">
                      <div class="progress-bar"></div>
                   </div>
-                  <span class="bottom-note">09 / 10</span>
+                  <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
                </div>
             </div>
          </section>
 
-         <section class="slide" data-slide="10">
+         <section class="slide" data-slide="12">
             <div class="top-band">
                <div class="top-left">
                   <img
@@ -1289,7 +1461,7 @@
                      <div class="band-sub">Thank you for visiting</div>
                   </div>
                </div>
-               <div class="band-sub">Ask about your options</div>
+               <div class="band-sub">Patient consultation</div>
             </div>
             <div class="gradient-mesh">
                <div
@@ -1344,18 +1516,18 @@
             </div>
             <div class="bottom-band">
                <div class="bottom-left">
-                  <span class="bottom-note">Reception slideshow</span>
+                  <span class="bottom-note">Robert A. Berberian, MD | Vanity Medical Spa</span>
                </div>
                <div class="progress-wrap">
-                  <div class="progress-track">
-                     <div class="progress-bar"></div>
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar "></div>
                   </div>
-                  <span class="bottom-note">10 / 10</span>
+                  <span class="bottom-note pc-hide">12 / 12</span>
                </div>
             </div>
          </section>
       </div>
-      <div class="nav-controls" aria-label="Slide navigation">
+      <div class="nav-controls" aria-label="Preview navigation">
          <button
             class="nav-btn"
             onclick="changeSlide(-1)"
@@ -1370,7 +1542,7 @@
             aria-label="Next slide"
          >
             &#8250;</button
-         ><span class="slide-counter" id="counter">1 / 10</span>
+         >
       </div>
       <script>
          let current = 1;
@@ -1489,6 +1661,20 @@
          animateSlide(document.querySelector(".slide.active"));
          updateNav();
          startAutoplay();
+
+         // Scale to fit any screen size — centered
+         function scaleToFit() {
+            const scaleX = window.innerWidth / 1920;
+            const scaleY = window.innerHeight / 1080;
+            const scale = Math.min(scaleX, scaleY);
+            const offsetX = (window.innerWidth - 1920 * scale) / 2;
+            const offsetY = (window.innerHeight - 1080 * scale) / 2;
+            document.body.style.transform = `scale(${scale})`;
+            document.body.style.left = offsetX + 'px';
+            document.body.style.top = offsetY + 'px';
+         }
+         scaleToFit();
+         window.addEventListener('resize', scaleToFit);
       </script>
    </body>
 </html>
