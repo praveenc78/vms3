@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="slides-format" content="viewport" />
+      <title>Vanity Medical Spa TV Slideshow - Latest Version</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap"
+         rel="stylesheet"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+      <style type="text/tailwindcss">
+         @theme {
+            --color-bg: #0f0d0b;
+            --color-bg-deep: #090807;
+            --color-surface: #171411;
+            --color-text: #f7f3eb;
+            --color-text-secondary: #ddd3c1;
+            --color-text-muted: #b8aa90;
+            --color-accent-1: #cfac52;
+            --color-accent-2: #f0e2b0;
+            --color-accent-3: #98b7c8;
+            --color-glass-bg: rgba(255, 255, 255, 0.06);
+            --color-glass-border: rgba(255, 255, 255, 0.1);
+            --color-vignette: rgba(0, 0, 0, 0.5);
+            --font-display: "Playfair Display", serif;
+            --font-body: "Inter", sans-serif;
+         }
+      </style>
+      <style>
+         :root {
+            --color-bg: #0f0d0b;
+            --color-text: #f7f3eb;
+            --glow-color-rgb: 207, 172, 82;
+         }
+         *,
+         *::before,
+         *::after {
+            box-sizing: border-box;
+         }
+         html,
+         body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+            background: var(--color-bg);
+         }
+         body {
+            font-family: Inter, sans-serif;
+            color: var(--color-text);
+         }
+         .deck {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+         }
+         .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transform: scale(0.98);
+            transition:
+               opacity 0.7s ease,
+               transform 0.7s ease;
+            pointer-events: none;
+            overflow: hidden;
+            background: linear-gradient(
+               145deg,
+               #0c0a08 0%,
+               #15110e 40%,
+               #0f0d0b 100%
+            );
+         }
+         .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+         }
+         .gradient-mesh {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+         }
+         .blob {
+            position: absolute;
+            border-radius: 9999px;
+            filter: blur(90px);
+            animation: float 18s ease-in-out infinite;
+         }
+         .blob:nth-child(2) {
+            animation-duration: 22s;
+         }
+         .blob:nth-child(3) {
+            animation-duration: 26s;
+         }
+         @keyframes float {
+            0%,
+            100% {
+               transform: translate(0, 0) scale(1);
+            }
+            50% {
+               transform: translate(30px, -20px) scale(1.08);
+            }
+         }
+         .slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: radial-gradient(
+               ellipse at center,
+               transparent 50%,
+               rgba(0, 0, 0, 0.44) 100%
+            );
+         }
+         .top-band,
+         .bottom-band {
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 4;
+            background: linear-gradient(
+               90deg,
+               rgba(6, 6, 6, 0.96),
+               rgba(20, 20, 20, 0.92) 55%,
+               rgba(10, 10, 10, 0.96)
+            );
+            border-color: rgba(255, 255, 255, 0.06);
+         }
+         .top-band {
+            top: 0;
+            height: 74px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 34px;
+         }
+         .bottom-band {
+            bottom: 0;
+            height: 52px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 34px;
+         }
+         .top-left,
+         .bottom-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+         }
+         .mini-logo {
+            height: 34px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 10px rgba(207, 172, 82, 0.18));
+         }
+         .band-title {
+            font-size: 14px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #ead9ab;
+            font-weight: 700;
+         }
+         .band-sub {
+            font-size: 12px;
+            color: #b8aa90;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+         }
+         .bottom-note {
+            font-size: 12px;
+            color: #cdbf9f;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+         }
+         .progress-wrap {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+         }
+         .progress-track {
+            width: 170px;
+            height: 4px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+         }
+         .progress-bar {
+            height: 100%;
+            width: 10%;
+            background: linear-gradient(90deg, #cfac52, #f0e2b0);
+         }
+         .content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            padding: 112px 72px 88px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+         }
+         .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+         }
+         .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 54px;
+            align-items: center;
+            height: 100%;
+         }
+         .service-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 54px;
+            align-items: center;
+         }
+         .hero-card,
+         .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+         }
+         .hero-photo {
+            width: 100%;
+            height: 78vh;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 30px;
+         }
+         .hero-photo-65 {
+            height: 65vh;
+         }
+		  .hero-photo-60 {
+            height: 60vh;
+         }
+         .service-image {
+            width: 100%;
+            height: 60vh;
+            object-fit: cover;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #111;
+         }
+		 .service-image-65 {
+            height: 65vh;
+         }
+		  .service-image-60 {
+            height: 60vh;
+         }
+         .service-copy {
+            padding: 34px 36px;
+         }
+         .logo-wrap {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 18px 20px;
+            display: inline-flex;
+            max-width: 450px;
+         }
+         .logo-wrap img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+         }
+         .eyebrow {
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: #cdbf9f;
+            font-size: 14px;
+            font-weight: 600;
+         }
+         .title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(44px, 5.8vw, 60px);
+            line-height: 0.95;
+            margin: 14px 0 30px;
+            color: #f7f3eb;
+         }
+         .sub {
+            font-size: 26px;
+            line-height: 1.38;
+            color: #e6dac5;
+			margin-bottom:30px;
+           }
+         .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 26px;
+         }
+         .pill {
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(207, 172, 82, 0.15);
+            border: 1px solid rgba(207, 172, 82, 0.35);
+            color: #f3e5bc;
+            font-size: 15px;
+            font-weight: 600;
+         }
+         .section-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(34px, 4vw, 56px);
+            line-height: 1.02;
+            margin: 0 0 12px;
+         }
+         .section-sub {
+            font-size: 20px;
+            color: #d9cfbd;
+            max-width: 860px;
+            margin-bottom: 26px;
+         }
+         .bullet-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 16px;
+         }
+         .bullet {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            color: #f3eee4;
+            font-size: 23px;
+            line-height: 1.32;
+         }
+         .bullet:before {
+            content: "✦";
+            color: #cfac52;
+            flex: 0 0 auto;
+            font-size: 20px;
+            margin-top: 3px;
+         }
+         .kicker {
+            color: #cfac52;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+         }
+         .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-top: 28px;
+         }
+         .trust-card {
+            padding: 24px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+         }
+         .trust-card h3 {
+            margin: 0 0 8px;
+            font-size: 22px;
+            color: #f0e2b0;
+         }
+         .trust-card p {
+            margin: 0;
+            color: #ddd3c1;
+            font-size: 17px;
+            line-height: 1.38;
+         }
+         .closing {
+            display: grid;
+            place-items: center;
+            text-align: center;
+            height: auto;
+         }
+         .closing h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(46px, 6vw, 90px);
+            margin: 18px 0 12px;
+         }
+         .closing p {
+            font-size: 23px;
+            color: #ddd3c1;
+            max-width: 760px;
+         }
+         .preview-controls {
+            position: fixed;
+            top: 88px;
+            right: 26px;
+            z-index: 105;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: rgba(12, 10, 8, 0.76);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            padding: 10px 12px;
+            border-radius: 999px;
+         }
+         .preview-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            height: 44px;
+            padding: 0 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
+            color: #f6eed9;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            cursor: pointer;
+         }
+         .preview-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+         }
+         .preview-state {
+            font-size: 12px;
+            color: #cdbf9f;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0 4px;
+         }
+         .nav-controls {
+            position: fixed;
+            bottom: 62px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 105;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(20, 16, 12, 0.72);
+            backdrop-filter: blur(10px);
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+         }
+         .nav-btn {
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #cfac52;
+            font-size: 20px;
+            cursor: pointer;
+         }
+         .slide-dots {
+            display: flex;
+            gap: 7px;
+         }
+         .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            cursor: pointer;
+         }
+         .dot.active {
+            background: #cfac52;
+            transform: scale(1.2);
+         }
+         .slide-counter {
+            font-size: 12px;
+            color: #cdbf9f;
+            min-width: 42px;
+            text-align: center;
+         }
+         @media (max-width: 1100px) {
+            .hero-grid,
+            .service-grid,
+            .trust-grid {
+               grid-template-columns: 1fr;
+            }
+            .content {
+               padding: 104px 30px 84px;
+            }
+            .hero-photo {
+               height: 42vh;
+            }
+            .service-image {
+               height: 40vh;
+            }
+            .service-grid {
+               gap: 26px;
+            }
+            .hero-grid {
+               gap: 28px;
+            }
+            .bullet {
+               font-size: 18px;
+            }
+            .sub,
+            .closing p,
+            .section-sub {
+               font-size: 18px;
+            }
+            .top-band {
+               padding: 0 18px;
+            }
+            .bottom-band {
+               padding: 0 18px;
+            }
+            .progress-track {
+               width: 100px;
+            }
+         }
+		 .pc-hide{display:none}
+      </style>
+   </head>
+   <body>
+      <div class="preview-controls" aria-label="Preview controls">
+         <button
+            class="preview-btn"
+            id="pauseToggle"
+            aria-label="Pause slideshow"
+         >
+            Pause
+         </button>
+         <span class="preview-state" id="playState">Preview mode</span>
+      </div>
+      <div class="deck">
+         <section class="slide active" data-slide="1">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">
+                        Aesthetic & regenerative medicine
+                     </div>
+                  </div>
+               </div>
+               <div class="band-sub">Welcome</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 360px;
+                     height: 360px;
+                     top: -90px;
+                     right: -70px;
+                     background: rgba(207, 172, 82, 0.18);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 280px;
+                     height: 280px;
+                     bottom: -70px;
+                     left: -40px;
+                     background: rgba(152, 183, 200, 0.14);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 240px;
+                     height: 240px;
+                     top: 36%;
+                     left: 40%;
+                     background: rgba(240, 226, 176, 0.1);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="hero-grid">
+                  <div class="reveal">
+                     <img
+                        class="hero-photo hero-photo-60 hero-card"
+                        src="dr-robert-1.jpg"
+                        alt="Dr. Robert Berberian holding Top Doctor plaque"
+                     />
+                  </div>
+                  <div>
+                     <div class="eyebrow reveal" style="margin-top: 20px">
+                        Welcome to personalized care
+                     </div>
+                     <h1 class="title reveal">Robert A. Berberian, MD</h1>
+                     <p class="sub reveal">
+                        Top Doctor 2025 & 2026, advanced aesthetics,
+                        regenerative medicine, and results-driven care tailored
+                        to every patient.
+                     </p>
+                     <div class="pill-row reveal">
+                        <span class="pill">Board-Certified</span
+                        ><span class="pill">60+ Treatments</span
+                        ><span class="pill">Injectables</span
+                        ><span class="pill">Regenerative Medicine</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Meet Your Provider</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar" id="progressBar"></div>
+                  </div>
+                  <span class="bottom-note pc-hide" id="slideLabel">01 / 12</span>
+               </div>
+            </div>
+         </section>
+
+         <section class="slide" data-slide="2">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">
+                        Aesthetic & regenerative medicine
+                     </div>
+                  </div>
+               </div>
+               <div class="band-sub">Welcome</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 320px;
+                     height: 320px;
+                     top: -60px;
+                     right: -50px;
+                     background: rgba(207, 172, 82, 0.15);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 220px;
+                     height: 220px;
+                     bottom: -50px;
+                     left: -40px;
+                     background: rgba(152, 183, 200, 0.1);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <h2 class="section-title reveal">What patients come here for</h2>
+               <p class="section-sub reveal">
+                  A premium med spa experience focused on facial rejuvenation,
+                  regenerative medicine, body contouring, and wellness
+                  therapies.
+               </p>
+               <div class="trust-grid">
+                  <div class="trust-card reveal">
+                     <h3>Injectables</h3>
+                     <p>
+                        Botox, Letybo, dermal fillers, and facial balancing
+                        treatments designed for natural-looking refinement.
+                     </p>
+                  </div>
+                  <div class="trust-card reveal">
+                     <h3>Skin Renewal</h3>
+                     <p>
+                        Morpheus8, microneedling, peels, and advanced recovery
+                        support for smoother, healthier-looking skin.
+                     </p>
+                  </div>
+                  <div class="trust-card reveal">
+                     <h3>Regenerative Care</h3>
+                     <p>
+                        Ariessence PDGF+, EBOO therapy, and wellness-driven
+                        treatments that support healing and vitality.
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Robert A. Berberian, MD | Vanity Medical Spa</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                  <span class="bottom-note">Bergen County's Top Doctor</span>
+               </div>
+            </div>
+         </section>
+
+         <section class="slide" data-slide="3">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Injectables</div>
+                  </div>
+               </div>
+               <div class="band-sub">Injectables</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 340px;
+                     height: 340px;
+                     top: -60px;
+                     right: -80px;
+                     background: rgba(207, 172, 82, 0.12);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 250px;
+                     height: 250px;
+                     bottom: -70px;
+                     left: -30px;
+                     background: rgba(240, 226, 176, 0.1);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="service-grid">
+                  <img
+                     class="service-image service-image-60 reveal"
+                     src="botox-1.jpg"
+                     alt="Botox before and after result"
+                  />
+                  <div class="glass-card service-copy reveal">
+                     <div class="kicker">Injectables</div>
+                     <h2 class="section-title">Botox Cosmetic</h2>
+                     <div class="bullet-list">
+                        <div class="bullet">
+                           Smooths fine lines and expression wrinkles.
+                        </div>
+                        <div class="bullet">
+                           Quick in-office treatment with no downtime.
+                        </div>
+                        <div class="bullet">
+                           Results typically appear within days.
+                        </div>
+                        <div class="bullet">
+                           A refreshed look that still feels natural.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Ask Us About Tox Tuesday Special</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                  <span class="bottom-note">Award-Winning Injector - Robert A. Berberian, MD</span>
+               </div>
+            </div>
+         </section>
+
+         <section class="slide" data-slide="4">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Injectables</div>
+                  </div>
+               </div>
+               <div class="band-sub">Injectables</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 360px;
+                     height: 360px;
+                     top: -60px;
+                     left: -40px;
+                     background: rgba(152, 183, 200, 0.11);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 260px;
+                     height: 260px;
+                     bottom: -60px;
+                     right: -40px;
+                     background: rgba(207, 172, 82, 0.13);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="service-grid">
+                  <img
+                     class="service-image service-image-60 reveal"
+                     src="letybo.jpg"
+                     alt="Letybo product image"
+                     style="
+                        background: #ece8e2;
+                        padding: 10px;
+                     "
+                  />
+                  <div class="glass-card service-copy reveal">
+                     <div class="kicker">Precision neurotoxin</div>
+                     <h2 class="section-title">Letybo</h2>
+                     <div class="bullet-list">
+                        <div class="bullet">
+                           Modern wrinkle-relaxing injectable option.
+                        </div>
+                        <div class="bullet">
+                           Designed for precise, refined treatment areas.
+                        </div>
+                        <div class="bullet">
+                           Ideal for patients seeking a polished appearance.
+                        </div>
+                        <div class="bullet">
+                           A strong companion offering alongside Botox Cosmetic.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Korean Innovation - FDA Approved</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                  <span class="bottom-note">Award-Winning Injector - Robert A. Berberian, MD</span>
+               </div>
+            </div>
+         </section>
+
+         <section class="slide" data-slide="5">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Facial balancing</div>
+                  </div>
+               </div>
+               <div class="band-sub">Injectables</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 330px;
+                     height: 330px;
+                     top: -70px;
+                     right: -70px;
+                     background: rgba(240, 226, 176, 0.11);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 250px;
+                     height: 250px;
+                     bottom: -50px;
+                     left: -50px;
+                     background: rgba(152, 183, 200, 0.1);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="service-grid">
+                  <img
+                     class="service-image reveal"
+                     src="cheek-augmentation.jpg"
+                     alt="Facial rejuvenation illustration"
+                     style="
+                        background: #f1eeea;
+                        padding: 10px;
+                     "
+                  />
+                  <div class="glass-card service-copy reveal">
+                     <div class="kicker">Facial balancing</div>
+                     <h2 class="section-title">Dermal Fillers</h2>
+                     <div class="bullet-list">
+                        <div class="bullet">
+                           Restore volume to cheeks, lips, and jawline.
+                        </div>
+                        <div class="bullet">
+                           Support facial harmony with customized placement.
+                        </div>
+                        <div class="bullet">
+                           Immediate visible improvement with minimal downtime.
+                        </div>
+                        <div class="bullet">
+                           Designed to enhance, not overdone.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Complete Facial Rejuvenation</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                  <span class="bottom-note">Award-Winning Injector - Robert A. Berberian, MD</span>
+               </div>
+            </div>
+         </section>
+
+         <section class="slide" data-slide="6">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Regenerative skin support</div>
+                  </div>
+               </div>
+               <div class="band-sub">Regenerative Skin</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 340px;
+                     height: 340px;
+                     top: -70px;
+                     left: -60px;
+                     background: rgba(207, 172, 82, 0.12);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 230px;
+                     height: 230px;
+                     bottom: -40px;
+                     right: -40px;
+                     background: rgba(204, 84, 130, 0.1);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="service-grid">
+                  <img
+                     class="service-image reveal"
+                     src="ariessenece.jpg"
+                     alt="Ariessence healing timeline"
+                     style="
+                         background: #f6f4f5;
+                        padding: 10px;
+                     "
+                  />
+                  <div class="glass-card service-copy reveal">
+                     <div class="kicker">Regenerative skin support</div>
+                     <h2 class="section-title">Ariessence PDGF+</h2>
+                     <div class="bullet-list">
+                        <div class="bullet">
+                           Advanced post-procedure support without a blood draw.
+                        </div>
+                        <div class="bullet">
+                           Often paired with microneedling treatments.
+                        </div>
+                        <div class="bullet">
+                           Helps calm visible redness and support recovery.
+                        </div>
+                        <div class="bullet">
+                           A smart upgrade for patients focused on skin quality.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">No Blood Draw Required</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                  <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
+               </div>
+            </div>
+         </section>
+
+         <section class="slide" data-slide="7">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Skin renewal</div>
+                  </div>
+               </div>
+               <div class="band-sub">Skin Renewal</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 360px;
+                     height: 360px;
+                     top: -80px;
+                     right: -80px;
+                     background: rgba(152, 183, 200, 0.13);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 250px;
+                     height: 250px;
+                     bottom: -50px;
+                     left: -40px;
+                     background: rgba(207, 172, 82, 0.1);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="service-grid">
+                  <img
+                     class="service-image reveal"
+                     src="microneedling-morpheus-can-treat.jpg"
+                     alt="Treatment areas for skin renewal"
+                     style="
+                        background: #dfeaf2;
+                        padding: 10px;
+                     "
+                  />
+                  <div class="glass-card service-copy reveal">
+                     <div class="kicker">Skin renewal</div>
+                     <h2 class="section-title">
+                        Morpheus8 & Advanced Resurfacing
+                     </h2>
+                     <div class="bullet-list">
+                        <div class="bullet">
+                           Targets texture, laxity, acne scars, and wrinkles.
+                        </div>
+                        <div class="bullet">
+                           Can be used on face, neck, abdomen, back, and legs.
+                        </div>
+                        <div class="bullet">
+                           Supports collagen remodeling and smoother skin tone.
+                        </div>
+                        <div class="bullet">
+                           A versatile option for both facial and body areas.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Complete Skin Rejuvenation</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                   <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
+               </div>
+            </div>
+         </section>
+
+         <section class="slide" data-slide="8">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Wellness therapy</div>
+                  </div>
+               </div>
+               <div class="band-sub">Wellness Therapy</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 350px;
+                     height: 350px;
+                     top: -70px;
+                     left: -50px;
+                     background: rgba(98, 168, 197, 0.14);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 260px;
+                     height: 260px;
+                     bottom: -60px;
+                     right: -40px;
+                     background: rgba(207, 172, 82, 0.12);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="service-grid">
+                  <img
+                     class="service-image service-image-65 reveal"
+                     src="eb3.jpg"
+                     alt="Patient receiving EBOO therapy"
+				     style="background: rgb(246, 243, 242);
+                            padding: 10px;
+                            transition: opacity 0.45s, transform 0.45s;
+                            opacity: 1;
+                            transform: translateY(0px)"
+                  />
+                  <div class="glass-card service-copy reveal">
+                     <div class="kicker">Regenerative Wellness</div>
+                     <h2 class="section-title">EBOO Therapy</h2>
+                     <div class="bullet-list">
+                        <div class="bullet">
+                           Advanced blood filtration, oxygenation, and ozonation
+                           protocol.
+                        </div>
+                        <div class="bullet">
+                           Performed in a comfortable monitored clinical
+                           setting.
+                        </div>
+                        <div class="bullet">
+                           Popular with patients focused on recovery, stamina,
+                           and wellness.
+                        </div>
+                        <div class="bullet">
+                           A standout offering in regenerative and functional
+                           care.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Ozone Therapy</span>
+               </div>
+               <div class="progress-wrap">
+			      <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                  <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
+               </div>
+            </div>
+         </section>
+		 
+		    <section class="slide" data-slide="9">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Wellness therapy</div>
+                  </div>
+               </div>
+               <div class="band-sub">Women's Wellness</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 350px;
+                     height: 350px;
+                     top: -70px;
+                     left: -50px;
+                     background: rgba(98, 168, 197, 0.14);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 260px;
+                     height: 260px;
+                     bottom: -60px;
+                     right: -40px;
+                     background: rgba(207, 172, 82, 0.12);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="service-grid">
+                  <img
+                     class="service-image service-image-65 reveal"
+                     src="o-shot.jpg"
+                     alt="O-Shot For Women"
+				     style="background: rgb(246, 243, 242);
+                            padding: 10px;
+                            transition: opacity 0.45s, transform 0.45s;
+                            opacity: 1;
+                            transform: translateY(0px)"
+                  />
+                  <div class="glass-card service-copy reveal">
+                     <div class="kicker">Intimate Wellness</div>
+                     <h2 class="section-title">The O-Shot</h2>
+                     <div class="bullet-list">
+                        <div class="bullet">
+                           Enhances intimate sensitivity &amp; wellness.
+                        </div>
+                        <div class="bullet">
+                           Addresses urinary stress incontinence.
+                        </div>
+                        <div class="bullet">
+                           Uses natural regenerative growth factors.
+                        </div>
+                        <div class="bullet">
+                           Discreet, in-office care with no downtime.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Request Private Consulation</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                  <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
+               </div>
+            </div>
+         </section>
+		 
+		 <section class="slide" data-slide="10">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Wellness therapy</div>
+                  </div>
+               </div>
+               <div class="band-sub">Men's Wellness</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 350px;
+                     height: 350px;
+                     top: -70px;
+                     left: -50px;
+                     background: rgba(98, 168, 197, 0.14);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 260px;
+                     height: 260px;
+                     bottom: -60px;
+                     right: -40px;
+                     background: rgba(207, 172, 82, 0.12);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="service-grid">
+                  <img
+                     class="service-image service-image-65 reveal"
+                     src="p-shot-paramus-nj.jpg"
+                     alt="P-Shot For Men"
+				     style="background: rgb(246, 243, 242);
+                            padding: 10px;
+                            transition: opacity 0.45s, transform 0.45s;
+                            opacity: 1;
+                            transform: translateY(0px)"
+                  />
+                  <div class="glass-card service-copy reveal">
+                     <div class="kicker">Intimate Wellness</div>
+                     <h2 class="section-title">P-Shot®<br>& More</h2>
+                     <div class="bullet-list">
+                        <div class="bullet">
+                          Regenerative enhancement for performance.
+                        </div>
+                        <div class="bullet">
+                           Addresses erectile dysfunction naturally.
+                        </div>
+                        <div class="bullet">
+                           Penile fillers for aesthetic confidence.
+                        </div>
+                        <div class="bullet">
+                           Safe, professional, and discreet results.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Request Private Consulation</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                   <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
+               </div>
+            </div>
+         </section>
+
+         <section class="slide" data-slide="11">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Body contouring</div>
+                  </div>
+               </div>
+               <div class="band-sub">Body Contouring</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 320px;
+                     height: 320px;
+                     top: -70px;
+                     right: -40px;
+                     background: rgba(207, 172, 82, 0.12);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 250px;
+                     height: 250px;
+                     bottom: -50px;
+                     left: -40px;
+                     background: rgba(240, 226, 176, 0.12);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="service-grid">
+                  <img
+                     class="service-image service-image-65 reveal"
+                     src="sculptra-butt-lift-paramus-nj.jpg"
+                     alt="Sculptra butt lift body contouring image"
+                     style="background: rgb(246, 243, 242);
+                            padding: 10px;
+                            transition: opacity 0.45s, transform 0.45s;
+                            opacity: 1;
+                            transform: translateY(0px)"
+                  />
+                  <div class="glass-card service-copy reveal">
+                     <div class="kicker">Body contouring</div>
+                     <h2 class="section-title">Sculptra Butt Lift</h2>
+                     <div class="bullet-list">
+                        <div class="bullet">
+                           Non-surgical option for gradual shape and lift.
+                        </div>
+                        <div class="bullet">
+                           Stimulates collagen for a natural-looking result.
+                        </div>
+                        <div class="bullet">
+                           Ideal for patients seeking enhancement without
+                           surgery.
+                        </div>
+                        <div class="bullet">
+                           Designed for subtle volume and long-lasting
+                           improvement.
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Non-Surgical Butt Lift</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar"></div>
+                  </div>
+                  <span class="bottom-note">Administered By Robert A. Berberian, MD</span>
+               </div>
+            </div>
+         </section>
+
+         <section class="slide" data-slide="12">
+            <div class="top-band">
+               <div class="top-left">
+                  <img
+                     class="mini-logo"
+                     src="gold-logo.png"
+                     alt="Vanity Medical Spa logo"
+                  />
+                  <div>
+                     <div class="band-title">Vanity Medical Spa</div>
+                     <div class="band-sub">Thank you for visiting</div>
+                  </div>
+               </div>
+               <div class="band-sub">Patient consultation</div>
+            </div>
+            <div class="gradient-mesh">
+               <div
+                  class="blob"
+                  style="
+                     width: 360px;
+                     height: 360px;
+                     top: -80px;
+                     right: -80px;
+                     background: rgba(207, 172, 82, 0.15);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 270px;
+                     height: 270px;
+                     bottom: -80px;
+                     left: -50px;
+                     background: rgba(152, 183, 200, 0.1);
+                  "
+               ></div>
+               <div
+                  class="blob"
+                  style="
+                     width: 220px;
+                     height: 220px;
+                     top: 45%;
+                     left: 20%;
+                     background: rgba(240, 226, 176, 0.12);
+                  "
+               ></div>
+            </div>
+            <div class="content">
+               <div class="closing">
+                  <div class="logo-wrap reveal">
+                     <img src="gold-logo.png" alt="Vanity Medical Spa logo" />
+                  </div>
+                  <h2 class="reveal">Ask about your options today</h2>
+                  <p class="reveal">
+                     Injectables, regenerative medicine, skin renewal, body
+                     contouring, and personalized treatment planning at Vanity
+                     Medical Spa.
+                  </p>
+                  <div class="pill-row reveal" style="justify-content: center">
+                     <span class="pill">Facial Rejuvenation</span
+                     ><span class="pill">Skin Renewal</span
+                     ><span class="pill">Wellness</span
+                     ><span class="pill">Confidence</span>
+                  </div>
+               </div>
+            </div>
+            <div class="bottom-band">
+               <div class="bottom-left">
+                  <span class="bottom-note">Robert A. Berberian, MD | Vanity Medical Spa</span>
+               </div>
+               <div class="progress-wrap">
+                  <div class="progress-track pc-hide">
+                     <div class="progress-bar "></div>
+                  </div>
+                  <span class="bottom-note pc-hide">12 / 12</span>
+               </div>
+            </div>
+         </section>
+      </div>
+      <div class="nav-controls" aria-label="Preview navigation">
+         <button
+            class="nav-btn"
+            onclick="changeSlide(-1)"
+            aria-label="Previous slide"
+         >
+            &#8249;
+         </button>
+         <div class="slide-dots" id="dots"></div>
+         <button
+            class="nav-btn"
+            onclick="changeSlide(1)"
+            aria-label="Next slide"
+         >
+            &#8250;</button
+         >
+      </div>
+      <script>
+         let current = 1;
+         const slides = document.querySelectorAll(".slide");
+         const total = slides.length;
+         const dotsContainer = document.getElementById("dots");
+         const counter = document.getElementById("counter");
+         const pauseToggle = document.getElementById("pauseToggle");
+         const playState = document.getElementById("playState");
+         let isPaused = false;
+         let autoplayTimer = null;
+         for (let i = 1; i <= total; i++) {
+            const dot = document.createElement("div");
+            dot.className = "dot" + (i === 1 ? " active" : "");
+            dot.onclick = () => goToSlide(i, true);
+            dotsContainer.appendChild(dot);
+         }
+         function animateSlide(slide) {
+            slide.querySelectorAll(".reveal").forEach((el, i) => {
+               el.style.transition = "none";
+               el.style.opacity = "0";
+               el.style.transform = "translateY(20px)";
+               el.offsetHeight;
+               const delay = i * 0.08;
+               el.style.transition = `opacity .45s ease ${delay}s, transform .45s ease ${delay}s`;
+               el.style.opacity = "1";
+               el.style.transform = "translateY(0)";
+            });
+         }
+         function updateProgress() {
+            const pct = (current / total) * 100;
+            document
+               .querySelectorAll(".progress-bar")
+               .forEach((el) => (el.style.width = `${pct}%`));
+            const label = document.getElementById("slideLabel");
+            if (label)
+               label.textContent =
+                  String(current).padStart(2, "0") +
+                  " / " +
+                  String(total).padStart(2, "0");
+         }
+         function updateNav() {
+            document
+               .querySelectorAll(".dot")
+               .forEach((d, i) =>
+                  d.classList.toggle("active", i + 1 === current),
+               );
+            counter.textContent = `${current} / ${total}`;
+            updateProgress();
+         }
+         function goToSlide(n, manual = false) {
+            document.querySelector(".slide.active")?.classList.remove("active");
+            const next = document.querySelector(`.slide[data-slide="${n}"]`);
+            if (next) {
+               next.classList.add("active");
+               animateSlide(next);
+            }
+            current = n;
+            updateNav();
+            if (manual && !isPaused) restartAutoplay();
+         }
+         function changeSlide(dir, manual = false) {
+            let next = current + dir;
+            if (next < 1) next = total;
+            if (next > total) next = 1;
+            goToSlide(next, manual);
+         }
+         function startAutoplay() {
+            clearInterval(autoplayTimer);
+            if (!isPaused) {
+               autoplayTimer = setInterval(() => changeSlide(1, false), 9000);
+            }
+         }
+         function restartAutoplay() {
+            startAutoplay();
+         }
+         function togglePause() {
+            isPaused = !isPaused;
+            pauseToggle.textContent = isPaused ? "Play" : "Pause";
+            pauseToggle.setAttribute(
+               "aria-label",
+               isPaused ? "Play slideshow" : "Pause slideshow",
+            );
+            playState.textContent = isPaused
+               ? "Paused for review"
+               : "Preview mode";
+            if (isPaused) {
+               clearInterval(autoplayTimer);
+            } else {
+               startAutoplay();
+            }
+         }
+         pauseToggle.addEventListener("click", togglePause);
+         document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight" || e.key === " ") {
+               e.preventDefault();
+               changeSlide(1, true);
+            }
+            if (e.key === "ArrowLeft") {
+               e.preventDefault();
+               changeSlide(-1, true);
+            }
+            if (e.key.toLowerCase() === "p") {
+               e.preventDefault();
+               togglePause();
+            }
+         });
+         let touchStartX = 0;
+         document.addEventListener("touchstart", (e) => {
+            touchStartX = e.touches[0].clientX;
+         });
+         document.addEventListener("touchend", (e) => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1, true);
+         });
+         animateSlide(document.querySelector(".slide.active"));
+         updateNav();
+         startAutoplay();
+      </script>
+   </body>
+</html>
